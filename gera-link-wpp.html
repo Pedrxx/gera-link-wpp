@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            /* width: 100%; */
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #mensagem {
+            height: 300px;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        #resultado a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        #resultado a:hover {
+            text-decoration: underline;
+        }
+
+        #limpar {
+            margin-top: 10px;
+            background-color: #ff6347;
+        }
+
+        #limpar:hover {
+            background-color: #dc143c;
+        }
+    </style>
+    <title>Gerador de Link do WhatsApp</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Gerador de Link do WhatsApp</h1>
+    <form id="whatsappForm">
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" placeholder="Digite o número de telefone" required>
+
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem" required></textarea>
+
+        <button type="button" onclick="gerarLinkWhatsApp()">Gerar Link do WhatsApp</button>
+        <button id="limpar" onclick="limparConteudo()">Limpar</button>
+    </form>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+    function gerarLinkWhatsApp() {
+        var telefone = document.getElementById("telefone").value;
+        var mensagem = document.getElementById("mensagem").value;
+
+        var mensagemCodificada = encodeURIComponent(mensagem);
+        var linkWhatsapp = "https://api.whatsapp.com/send?phone=" + telefone + "&text=" + mensagemCodificada;
+
+        var resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.innerHTML = "<p>Link gerado:</p><a href='" + linkWhatsapp + "' target='_blank'>" + linkWhatsapp + "</a>";
+    }
+
+    function limparConteudo() {
+        var resultadoDiv = document.getElementById("resultado");
+        resultadoDiv.innerHTML = '';
+    }
+</script>
+
+</body>
+</html>
